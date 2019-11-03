@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  labels:
+    name: db-service
+    app: demo-voting-app
+spec:
+  #type: NodePort --> default is ClusterIP
+  ports:
+    - targetPort: 5432
+      port: 5342
+#      nodePort: 30008 #30000-32767 --> no nodeport in clusterIP for internal communication
+  selector:
+    name: postgres-pod
+    app: demo-voting-app
